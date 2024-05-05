@@ -1,0 +1,7 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/p/source/repos/WolffAstro/Assets/AnimRakiety.png","C:/Users/p/source/repos/WolffAstro/Assets/bin/WindowsStoreApp/Content/AnimRakiety.xnb","TextureProcessor","Texture2DContent",2463,201685,0,1910362
+"C:/Users/p/source/repos/WolffAstro/Assets/control.png","C:/Users/p/source/repos/WolffAstro/Assets/bin/WindowsStoreApp/Content/control.xnb","TextureProcessor","Texture2DContent",2642,416725,0,0453662
+"C:/Users/p/source/repos/WolffAstro/Assets/meteor.png","C:/Users/p/source/repos/WolffAstro/Assets/bin/WindowsStoreApp/Content/meteor.xnb","TextureProcessor","Texture2DContent",2064,153173,0,010297
+"C:/Users/p/source/repos/WolffAstro/Assets/niebo.png","C:/Users/p/source/repos/WolffAstro/Assets/bin/WindowsStoreApp/Content/niebo.xnb","TextureProcessor","Texture2DContent",10059,1536085,0,0618445
+"C:/Users/p/source/repos/WolffAstro/Assets/pocisk2D.png","C:/Users/p/source/repos/WolffAstro/Assets/bin/WindowsStoreApp/Content/pocisk2D.xnb","TextureProcessor","Texture2DContent",1241,3145,0,0063416
+"C:/Users/p/source/repos/WolffAstro/Assets/rocket1.png","C:/Users/p/source/repos/WolffAstro/Assets/bin/WindowsStoreApp/Content/rocket1.xnb","TextureProcessor","Texture2DContent",1048,29905,0,0034436

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>WindowsStoreApp</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/p/source/repos/WolffAstro/Assets/AnimRakiety.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Assets/control.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Assets/meteor.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Assets/niebo.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Assets/pocisk2D.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Assets/rocket1.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Assets/wybuch.wav</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

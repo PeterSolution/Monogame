@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>WindowsStoreApp</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/AnimRakiety.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/control.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/meteor.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/niebo.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/pocisk2D.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/rocanim1.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/rocanim2.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/rocanim3.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/rocanim4.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/rocanim5.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/rocanim6.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/rocket1.png</File>
+    <File>C:/Users/p/source/repos/WolffAstro/Content/wybuch.wav</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

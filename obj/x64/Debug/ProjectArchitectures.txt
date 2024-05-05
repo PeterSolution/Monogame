@@ -1,0 +1,1 @@
+C:\Users\p\source\repos\WolffAstro\WolffAstro.csproj;x64
