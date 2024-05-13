@@ -97,9 +97,9 @@
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="aaa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Meteor.cs" />
+    <Compile Include="Pocisk.cs" />
     <Compile Include="Rakieta.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +113,7 @@
     <Content Include="Content\meteor.png" />
     <Content Include="Content\niebo.png" />
     <Content Include="Content\pocisk2D.png" />
+    <Content Include="Content\przegrana.png" />
     <Content Include="Content\rocket1.png" />
     <Content Include="Content\wybuch.wav" />
     <Content Include="Properties\Default.rd.xml" />
@@ -142,6 +143,8 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\Arial.spritefont" />
+    <None Include="Content\Arial.xnb" />
     <None Include="Content\Content.mgcb" />
     <None Include="Content\obj\WindowsStoreApp\Content\.mgstats" />
   </ItemGroup>

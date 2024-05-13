@@ -25,28 +25,28 @@ namespace WolffAstro
         {
             if (position.X - 5 > 10)
             {
-                position.X -= 1;
+                position.X -= 5;
             }
         }
         public void MoveR()
         {
             if (position.X + 5 < 420)
             {
-                position.X += 1;
+                position.X += 5;
             }
         }
         public void MoveU() 
         { 
             if(position.Y - 5 > 80)
             {
-                position.Y-= 1;
+                position.Y-= 5;
             }
         }
         public void MoveD()
         {
             if (position.Y + 5 < 600)
             {
-                position.Y += 1;
+                position.Y += 5;
             }
         }
         

@@ -6,13 +6,16 @@ using Microsoft.Xna.Framework.Input.Touch;
 using System.Threading;
 using System;
 using Microsoft.Xna.Framework.Audio;
+using SharpDX.DirectWrite;
+using SharpDX.Direct2D1;
+using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
 
 namespace WolffAstro
 {
     public class Game1 : Game
     {
+        int zestrzelonemeteory = 0;
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
         Texture2D tekstura;
         Texture2D tlo;
         Rakieta gracz;
@@ -26,12 +29,15 @@ namespace WolffAstro
         Texture2D teksurameteoru;
         int meteortyp = 0;
         int savemeteortyp;
-        bool ismeteor=false;
-        bool isenemy=false;
-        bool colision=false;
-        bool pause=false;
-        bool czywystrzelony=false;
+        bool ismeteor = false;
+        bool isenemy = false;
+        bool colision = false;
+        bool czywystrzelony = false;
+        Pocisk pocisk;
+        Texture2D pocisktekstura;
+        int pocx;
         int[] xy = { 0, 0, 0, 0 };
+        bool pocmet = false;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -42,10 +48,10 @@ namespace WolffAstro
         protected override void Initialize()
         {
 
-            _graphics.PreferredBackBufferWidth = 480; 
-            _graphics.PreferredBackBufferHeight = 800; 
+            _graphics.PreferredBackBufferWidth = 480;
+            _graphics.PreferredBackBufferHeight = 800;
 
-            _graphics.ApplyChanges(); 
+            _graphics.ApplyChanges();
 
 
             Mouse.WindowHandle = Window.Handle;
@@ -72,7 +78,7 @@ namespace WolffAstro
         }
         void meteorexecute(object state)
         {
-            lock(this)
+            lock (this)
             {
                 if (meteortyp >= 2)
                 {
@@ -84,7 +90,7 @@ namespace WolffAstro
                 }
             }
         }
-        int meteorpoz=0;
+        int meteorpoz = 0;
         void meteorposition(object state)
         {
             lock (this)
@@ -97,14 +103,16 @@ namespace WolffAstro
         {
             tlo = Content.Load<Texture2D>("niebo");
             animrocket = Content.Load<Texture2D>("AnimRakiety");
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
             tekstura = Content.Load<Texture2D>("rocket1");
             gracz = new Rakieta(tekstura);
             control = Content.Load<Texture2D>("control");
             szerokosc = tekstura.Width;
             teksurameteoru = Content.Load<Texture2D>("meteor");
             wrog = new Meteor(teksurameteoru);
-            // TODO: use this.Content to load your game content here
+
+            pocisktekstura = Content.Load<Texture2D>("pocisk2D");
+
+            pocisk = new Pocisk(pocisktekstura);
         }
         MouseState mouseState;
         protected override void Update(GameTime gameTime)
@@ -136,7 +144,6 @@ namespace WolffAstro
                         ismeteor = true;
                         isenemy = true;
                         savemeteortyp = meteortyp;
-                        //127,113
                         if (savemeteortyp == 0)
                         {
                             klatkawroga = new Rectangle(0, 0, 127, teksurameteoru.Height);
@@ -172,20 +179,25 @@ namespace WolffAstro
                     }
 
                 }
-                if (gracz.getposition().X+tekstura.Width > xy[0] && gracz.getposition().X < xy[1])
+                if (gracz.getposition().X + tekstura.Width > xy[0] && gracz.getposition().X < xy[1])
                 {
-                    if (gracz.getposition().Y+tekstura.Height > xy[2] && gracz.getposition().Y < xy[3])
+                    if (gracz.getposition().Y + tekstura.Height > xy[2] && gracz.getposition().Y < xy[3])
                     {
+
+
+                        colision = true;
+
                         SoundEffect soundEffect = Content.Load<SoundEffect>("wybuch");
+                        GraphicsDevice.Clear(Color.CornflowerBlue);
+
 
                         SoundEffectInstance soundInstance = soundEffect.CreateInstance();
                         soundInstance.Play();
-                        colision = true;
 
                     }
                 }
                 mouseState = Mouse.GetState();
-                if (mouseState.LeftButton == ButtonState.Pressed)
+                if (mouseState.LeftButton == ButtonState.Pressed&&colision==false)
                 {
                     int mouseX = mouseState.X;
                     int mouseY = mouseState.Y;
@@ -206,18 +218,18 @@ namespace WolffAstro
                         gracz.MoveR();
                     }
 
-                    //button
                     if (mouseX >= (0 + 325) && mouseX <= (0 + 325 + 100) && mouseY >= (583 + 67) && mouseY <= (583 + 67 + 100))
                     {
                         if (czywystrzelony == false)
                         {
-                            czywystrzelony=true;
-
+                            pocmet = false;
+                            czywystrzelony = true;
+                            pocx = (int)gracz.getposition().X + (tekstura.Width / 2);
+                            pocisk.setpoz(pocx, (int)gracz.getposition().Y + 10);
                         }
                     }
 
                 }
-                //325-100 67-100
 
 
 
@@ -248,23 +260,36 @@ namespace WolffAstro
                     Exit();
                 KeyboardState keyboardState = Keyboard.GetState();
 
-                if (keyboardState.IsKeyDown(Keys.W))
+                if (keyboardState.IsKeyDown(Keys.W) && colision == false)
                 {
                     gracz.MoveU();
                 }
-                if (keyboardState.IsKeyDown(Keys.S))
+                if (keyboardState.IsKeyDown(Keys.S) && colision == false)
                 {
                     gracz.MoveD();
                 }
-                if (keyboardState.IsKeyDown(Keys.A))
+                if (keyboardState.IsKeyDown(Keys.A) && colision == false)
                 {
                     gracz.MoveL();
                 }
-                if (keyboardState.IsKeyDown(Keys.D))
+                if (keyboardState.IsKeyDown(Keys.D) && colision == false)
                 {
                     gracz.MoveR();
                 }
+                if (!pocmet && czywystrzelony && colision == false)
+                {
+                    if (pocisk.getposition().X >= wrog.getposition().X && pocisk.getposition().X + pocisktekstura.Width <= wrog.getposition().X + teksurameteoru.Width &&
+                        pocisk.getposition().Y >= wrog.getposition().Y && pocisk.getposition().Y + pocisktekstura.Height <= wrog.getposition().Y + teksurameteoru.Height)
+                    {
 
+                        isenemy = false;
+                        wrog.changeposition(meteorpoz);
+                        ismeteor = false;
+                        pocmet = true;
+                        czywystrzelony = false;
+                        zestrzelonemeteory++;
+                    }
+                }
                 Draw(gameTime);
                 base.Update(gameTime);
             }
@@ -272,33 +297,47 @@ namespace WolffAstro
 
         protected override void Draw(GameTime gameTime)
         {
-            if (!pause)
+
+            SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(tlo, Vector2.Zero, Color.White);
+            if (czywystrzelony)
             {
-                SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
-
-                spriteBatch.Begin();
-                spriteBatch.Draw(tlo,Vector2.Zero,Color.White);
-                if (ismeteor)
-                {
-                    Vector2 pozycjameteoru = new Vector2((int)wrog.getposition().X, (int)wrog.getposition().Y);
-
-                    spriteBatch.Draw(teksurameteoru, pozycjameteoru, klatkawroga, Color.White);
-
-                }
-                GraphicsDevice.Clear(Color.CornflowerBlue);
-
-                // TODO: Add your drawing code here
-
-                base.Draw(gameTime);
-
-                Vector2 pozycjapoczatkowa = new Vector2((int)gracz.getposition().X, (int)gracz.getposition().Y);
-                spriteBatch.Draw(animrocket, pozycjapoczatkowa, klatka, Color.White);
-
-
-                spriteBatch.Draw(control, new Vector2(0, 583), Color.White);
-                spriteBatch.End();
+                pocisk.MoveU();
+                spriteBatch.Draw(pocisktekstura, pocisk.getposition(), Color.White);
             }
+            if (pocisk.getposition().Y < 0)
+            {
+                czywystrzelony = false;
+            }
+
+            if (ismeteor)
+            {
+                Vector2 pozycjameteoru = new Vector2((int)wrog.getposition().X, (int)wrog.getposition().Y);
+
+                spriteBatch.Draw(teksurameteoru, pozycjameteoru, klatkawroga, Color.White);
+
+            }
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+
+            base.Draw(gameTime);
+
+            Vector2 pozycjapoczatkowa = new Vector2((int)gracz.getposition().X, (int)gracz.getposition().Y);
+            spriteBatch.Draw(animrocket, pozycjapoczatkowa, klatka, Color.White);
+
+
+            spriteBatch.Draw(control, new Vector2(0, 583), Color.White);
+            if (colision)
+            {
+                SpriteFont font = Content.Load<SpriteFont>("Arial");
+                spriteBatch.DrawString(font, "PRZEGRALES", new Vector2(150, 300), Color.Red);
+            }
+            SpriteFont font2= Content.Load<SpriteFont>("Arial2");
+            spriteBatch.DrawString(font2, zestrzelonemeteory.ToString(), new Vector2(420,760), Color.White);
+            spriteBatch.End();
         }
-        
+
     }
 }
